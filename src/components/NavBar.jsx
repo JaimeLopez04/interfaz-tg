@@ -59,7 +59,7 @@ const NavbarComponent = ({setTheme, theme}) => {
 
 NavbarComponent.propTypes = {
     setTheme: PropTypes.func,
-    theme: PropTypes.func,
+    theme: PropTypes.string,
 }
 
 export default NavbarComponent
