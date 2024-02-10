@@ -16,7 +16,7 @@ const MyClasses = ({setTheme, theme}) => {
 
 MyClasses.propTypes = {
     setTheme: PropTypes.func,
-    theme: PropTypes.func
+    theme: PropTypes.string
 }
 
 export default MyClasses

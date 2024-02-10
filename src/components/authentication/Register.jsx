@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Swal from 'sweetalert2'
 
 const Register = () => {
     
@@ -7,7 +8,10 @@ const Register = () => {
         lastName: "",
         email: "",
         password: "",
+        confirmPassword: "" 
     });
+
+    const [passwordsMatch, setPasswordsMatch] = useState(true);
 
     const handleInputChange = (event) => {
         const { name, value} = event.target
@@ -15,12 +19,46 @@ const Register = () => {
             ...values,
             [name]:value
         })
+
+        // Comparar contraseñas cuando se escribe en el campo "Confirmar contraseña"
+        if (name === "confirmPassword") {
+            setPasswordsMatch(value === values.password);
+        }
     }
 
     const handleForm = (event) => {
         event.preventDefault();
-        console.log(values);
-    }
+
+        // Verificar si algún campo está vacío
+        const isEmptyField = Object.values(values).some((value) => value === "");
+        if (isEmptyField) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Todos los campos deben ser llenados para estar aqui",
+                confirmButtonColor: "#0c16ff",
+                background: '#efefef',
+                color: "black"
+            });
+            return;
+        }
+
+        // Verificar si las contraseñas coinciden
+        if (!passwordsMatch) {
+            Swal.fire({
+                icon: "error",
+                title: "Contraseñas distintas...",
+                text: "Tus contraseñas deben ser iguales",
+                confirmButtonColor: "#0c16ff",
+                background: '#efefef',
+                color: "black"
+            });
+            return;
+        }
+
+        // Si pasa todas las validaciones, envía el formulario
+        console.log("Formulario enviado:", values);
+    };
 
     return (
         <div className='h-[100vh] flex justify-center items-center bg-backgroundAuthentication bg-no-repeat bg-cover'>
@@ -83,9 +121,10 @@ const Register = () => {
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
+                        {/* Campos de contraseña */}
                         <div>
                             <label 
-                                htmlFor="user" 
+                                htmlFor="password" 
                                 className="block text-sm font-medium leading-6 text-white">
                                     Contraseña
                             </label>
@@ -102,19 +141,23 @@ const Register = () => {
 
                         <div>
                             <label 
-                                htmlFor="user" 
+                                htmlFor="confirmPassword" 
                                 className="block text-sm font-medium leading-6 text-white">
                                     Confirme su contraseña
                             </label>
                             <div className="mt-2">
                                 <input 
                                     type="password"
-                                    name="password"
-                                    value={values.password}
+                                    name="confirmPassword"
+                                    value={values.confirmPassword}
                                     placeholder="Confirma tu contraseña"
                                     className="block w-full rounded-md text-slate-50 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-300 focus:ring-2 focus:ring-inset focus:outline-none sm:text-sm sm:leading-6 p-2 bg-transparent"
                                     onChange={handleInputChange} />
                             </div>
+                            {/* Mostrar mensaje de error si las contraseñas no coinciden */}
+                            {!passwordsMatch && (
+                                <p className="text-red-500 text-sm">Las contraseñas no coinciden.</p>
+                            )}
                         </div>
                     </div>
 

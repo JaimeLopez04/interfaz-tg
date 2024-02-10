@@ -29,7 +29,7 @@ const Home = ({setTheme, theme}) => {
 
 Home.propTypes = {
     setTheme: PropTypes.func,
-    theme: PropTypes.func,
+    theme: PropTypes.string,
     setButtonTheme: PropTypes.func
 }
 

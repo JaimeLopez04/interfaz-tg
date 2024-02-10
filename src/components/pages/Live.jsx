@@ -11,7 +11,7 @@ const Live = ({setTheme, theme}) => {
 
 Live.propTypes = {
     setTheme: PropTypes.func,
-    theme: PropTypes.func
+    theme: PropTypes.string
 }
 
 export default Live

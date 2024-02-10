@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css'
 import Login from './components/authentication/Login';
 import Register from './components/authentication/Register';
@@ -36,6 +36,7 @@ function App() {
   return (
     <div className='dark:bg-slate-900 bg-neutral-50'>      
       <Routes>
+        <Route  path="/" element={<Navigate to="/login"/>} />
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/home' element={<Home setTheme={setTheme}  theme={theme} />}/>
