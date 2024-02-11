@@ -111,7 +111,7 @@ const Register = () => {
                 navigate('/login')
                 Swal.fire({
                     icon: "info",
-                    title: "¡Uuups...!",
+                    title: "Oops...!",
                     text: "¡Bienvenido de nuevo, parece que ya te habías registrado en nuestra APP!",
                     confirmButtonColor: "#0c16ff",
                     background: '#efefef',
@@ -121,7 +121,7 @@ const Register = () => {
         }).catch(function(e){
             Swal.fire({
                 icon: "error",
-                title: "¡Uuups...!",
+                title: "Oops...!",
                 text: "Algo salió mal y tuvimos un error al crear tu usuario",
                 confirmButtonColor: "#0c16ff",
                 background: '#efefef',

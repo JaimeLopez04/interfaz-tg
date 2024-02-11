@@ -2,6 +2,7 @@
 import { useState } from "react"
 import Swal from 'sweetalert2'
 import axios  from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 //Local Libraries
 import { apiUrl } from '../../api/apiUrl'
@@ -28,6 +29,8 @@ const Login = () => {
         setIsValid(isValidEmail);
     };
 
+    const navigate = useNavigate()
+
     const handleForm = (event) => {
         event.preventDefault();
 
@@ -45,8 +48,6 @@ const Login = () => {
             return
         }
 
-
-        console.log(values);
         let url = apiUrl + 'auth_user'
         axios.defaults.headers.post['content-type'] = 'application/json'
         axios.post(url,{
@@ -54,6 +55,7 @@ const Login = () => {
             password : values.password
         }).then(function(res){
             if(res.data.status_code === 200){
+                navigate('/home')
                 Swal.fire({
                     icon: "success",
                     title: "Bienvenid@ de nuevo",
@@ -69,14 +71,17 @@ const Login = () => {
             if(e.response.data.status_code === 422){
                 Swal.fire({
                     icon: "error",
-                    title: "Ups lamentamos decite que...",
+                    title: "Oops lamentamos decite que...",
                     text: `${e.response.data.message}`,
                     confirmButtonColor: "#0c16ff",
                     background: '#efefef',
                     color: "black"
                 })
-                return
             }
+            if(e.response.data.message === "Tu usuario no fue encontrado"){
+                navigate('/register')
+            }
+            return
         })
     }
 
