@@ -5,18 +5,21 @@ import { ArrowRight } from "phosphor-react";
 
 const TimelineComponent = () => {
     return (
-        <Timeline>
+        <Timeline className="h-[75vh] overflow-auto">
             <Timeline.Item>
                 <Timeline.Point />
                 <Timeline.Content>
-                    <Timeline.Time>August 2023</Timeline.Time>
-                    <Timeline.Title>Mobile App Development</Timeline.Title>
-                    <Timeline.Body>
-                        Launching our new mobile app on both iOS and Android platforms,
-                        providing users with seamless access to our services on the go.
+                    <Timeline.Time className="dark:text-white text-black">
+                        Febrero 20 de 2024
+                    </Timeline.Time>
+                    {/* <Timeline.Title className="dark:text-white text-black">
+                        Mobile App Development
+                    </Timeline.Title> */}
+                    <Timeline.Body className="dark:text-white text-black">
+                        En esta clase hubo 3 cambios importantes en los estudiantes
                     </Timeline.Body>
                     <Button type="primary" size="sm">
-                        Discover App Features
+                        Ver resumen
                         <ArrowRight className="ml-2 h-3 w-3" />
                     </Button>
                 </Timeline.Content>
@@ -24,24 +27,61 @@ const TimelineComponent = () => {
             <Timeline.Item>
                 <Timeline.Point />
                 <Timeline.Content>
-                    <Timeline.Time>July 2023</Timeline.Time>
-                    <Timeline.Title>Enhanced User Analytics</Timeline.Title>
-                    <Timeline.Body>
-                        Introducing advanced user analytics to gain deeper insights into
-                        user behavior and improve overall user experience.
+                    <Timeline.Time className="dark:text-white text-black">
+                        Febrero 22 de 2024
+                    </Timeline.Time>
+                    <Timeline.Body className="dark:text-white text-black">
+                        En esta clase hubo 3 cambios importantes en los estudiantes
                     </Timeline.Body>
+                    <Button type="primary" size="sm">
+                        Ver resumen
+                        <ArrowRight className="ml-2 h-3 w-3" />
+                    </Button>
                 </Timeline.Content>
             </Timeline.Item>
             <Timeline.Item>
                 <Timeline.Point />
-                    <Timeline.Content>
-                    <Timeline.Time>June 2023</Timeline.Time>
-                    <Timeline.Title>New Feature Rollout</Timeline.Title>
-                    <Timeline.Body>
-                        Rolling out a set of new features, including real-time chat support,
-                        enhanced search functionality, and personalized content
-                        recommendations.
+                <Timeline.Content>
+                    <Timeline.Time className="dark:text-white text-black">
+                        Febrero 23 de 2024
+                    </Timeline.Time>
+                    <Timeline.Body className="dark:text-white text-black">
+                        En esta clase hubo 3 cambios importantes en los estudiantes
                     </Timeline.Body>
+                    <Button type="primary" size="sm">
+                        Ver resumen
+                        <ArrowRight className="ml-2 h-3 w-3" />
+                    </Button>
+                </Timeline.Content>
+            </Timeline.Item>
+            <Timeline.Item>
+                <Timeline.Point />
+                <Timeline.Content>
+                    <Timeline.Time className="dark:text-white text-black">
+                        Febrero 23 de 2024
+                    </Timeline.Time>
+                    <Timeline.Body className="dark:text-white text-black">
+                        En esta clase hubo 3 cambios importantes en los estudiantes
+                    </Timeline.Body>
+                    <Button type="primary" size="sm">
+                        Ver resumen
+                        <ArrowRight className="ml-2 h-3 w-3" />
+                    </Button>
+                </Timeline.Content>
+            </Timeline.Item>
+            <Timeline.Item>
+                <Timeline.Point />
+                <Timeline.Content>
+                    <Timeline.Time className="dark:text-white text-black">
+                        Febrero 23 de 2024
+                    </Timeline.Time>
+                    <Timeline.Body className="dark:text-white text-black">
+                        En esta clase hubo 3 cambios importantes en los estudiantes
+                    </Timeline.Body>
+                    <Button type="primary" size="sm">
+                        Ver resumen
+                        <ArrowRight className="ml-2 h-3 w-3" />
+                    </Button>
                 </Timeline.Content>
             </Timeline.Item>
         </Timeline>
