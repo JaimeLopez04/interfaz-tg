@@ -1,5 +1,11 @@
+//React Libraries
 import { useState } from "react";
 import Swal from 'sweetalert2'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+
+//Local libraries
+import { apiUrl } from '../../api/apiUrl'
 
 const Register = () => {
     
@@ -25,6 +31,16 @@ const Register = () => {
             setPasswordsMatch(value === values.password);
         }
     }
+
+    const [isValid, setIsValid] = useState(true);
+
+    const validateEmail = (email) => {
+        const pattern = /^[\w\.-]+@[\w\.-]+\.\w+$/;
+        const isValidEmail = pattern.test(email);
+        setIsValid(isValidEmail);
+    };
+
+    const navigate = useNavigate()
 
     const handleForm = (event) => {
         event.preventDefault();
@@ -56,8 +72,62 @@ const Register = () => {
             return;
         }
 
-        // Si pasa todas las validaciones, envía el formulario
-        console.log("Formulario enviado:", values);
+        validateEmail(values.email)
+
+        if (!isValid)  {
+            Swal.fire({
+                icon: "error",
+                title: "Correo invalido...",
+                text: "Tu correo electronico no tiene un formato valido",
+                confirmButtonColor: "#0c16ff",
+                background: '#efefef',
+                color: "black"
+            });
+            return
+        }
+        let url = apiUrl + 'create_user'        
+        axios.defaults.headers.post['content-type'] = 'application/json'
+        axios.post(url,{
+            user_names : values.name,
+            user_last_names : values.lastName,
+            email : values.email,
+            password : values.confirmPassword
+        }).then(function(res) {
+            console.log(res);
+            if(res.data.status_code === 200){
+                navigate('/login')
+                Swal.fire({
+                    icon: "success",
+                    title: "¡Registro exitoso!",
+                    text: "¡Bienvenido, ahora puedes disfrutar de nuestra APP!",
+                    confirmButtonColor: "#0c16ff",
+                    background: '#efefef',
+                    color: "black"
+                })
+            }
+
+            if(res.data.status_code === 422){
+                console.log(res);
+                navigate('/login')
+                Swal.fire({
+                    icon: "info",
+                    title: "Oops...!",
+                    text: "¡Bienvenido de nuevo, parece que ya te habías registrado en nuestra APP!",
+                    confirmButtonColor: "#0c16ff",
+                    background: '#efefef',
+                    color: "black"
+                })
+            }
+        }).catch(function(e){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...!",
+                text: "Algo salió mal y tuvimos un error al crear tu usuario",
+                confirmButtonColor: "#0c16ff",
+                background: '#efefef',
+                color: "black"
+            })
+        })
     };
 
     return (

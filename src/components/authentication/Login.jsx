@@ -1,4 +1,11 @@
+//React Libraries
 import { useState } from "react"
+import Swal from 'sweetalert2'
+import axios  from 'axios'
+import { useNavigate } from 'react-router-dom'
+
+//Local Libraries
+import { apiUrl } from '../../api/apiUrl'
 
 const Login = () => {
     const [values, setValues] = useState({
@@ -7,16 +14,75 @@ const Login = () => {
     });
 
     const handleInputChange = (event) => {
-        const { name, value} = event.target
+        const { name, value } = event.target
         setValues({
             ...values,
             [name]:value
         })
     }
 
+    const [isValid, setIsValid] = useState(true);
+
+    const validateEmail = (email) => {
+        const pattern = /^[\w\.-]+@[\w\.-]+\.\w+$/;
+        const isValidEmail = pattern.test(email);
+        setIsValid(isValidEmail);
+    };
+
+    const navigate = useNavigate()
+
     const handleForm = (event) => {
         event.preventDefault();
-        console.log(values);
+
+        validateEmail(values.email)
+
+        if (!isValid)  {
+            Swal.fire({
+                icon: "error",
+                title: "Correo invalido...",
+                text: "Tu correo electronico no tiene un formato valido",
+                confirmButtonColor: "#0c16ff",
+                background: '#efefef',
+                color: "black"
+            });
+            return
+        }
+
+        let url = apiUrl + 'auth_user'
+        axios.defaults.headers.post['content-type'] = 'application/json'
+        axios.post(url,{
+            email : values.email,
+            password : values.password
+        }).then(function(res){
+            if(res.data.status_code === 200){
+                navigate('/home')
+                Swal.fire({
+                    icon: "success",
+                    title: "Bienvenid@ de nuevo",
+                    text: res.data.message,
+                    confirmButtonColor: "#0c16ff",
+                    background: '#efefef',
+                    color: "black"
+                })
+                return
+            }
+        }).catch(function(e){
+            console.log(e.response.data.status_code);
+            if(e.response.data.status_code === 422){
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops lamentamos decite que...",
+                    text: `${e.response.data.message}`,
+                    confirmButtonColor: "#0c16ff",
+                    background: '#efefef',
+                    color: "black"
+                })
+            }
+            if(e.response.data.message === "Tu usuario no fue encontrado"){
+                navigate('/register')
+            }
+            return
+        })
     }
 
     return (
@@ -62,11 +128,11 @@ const Login = () => {
                     </div>
 
                     <button 
-                        type="button"
+                        type="submit"
                         className="flex w-full justify-center rounded-md bg-[#0c16ff] hover:bg-[#567dff] hover:text-[#0a0e5c] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        <a href="/home"> 
+                        {/* <a href="/home">  */}
                             Entrar
-                        </a>
+                        {/* </a> */}
                     </button>
                 </form>
 
