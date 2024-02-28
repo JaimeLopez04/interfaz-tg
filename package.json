@@ -17,6 +17,7 @@
     "@mui/styled-engine-sc": "^6.0.0-alpha.13",
     "@mui/x-charts": "^6.19.1",
     "autoprefixer": "^10.4.17",
+    "axios": "^1.6.7",
     "keep-react": "^1.1.2",
     "phosphor-react": "^1.4.1",
     "postcss": "^8.4.33",
