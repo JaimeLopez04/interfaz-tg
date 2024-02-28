@@ -1,7 +1,5 @@
 
 "use client";
-// import Image from "next/image";
-import { MagnifyingGlass } from "phosphor-react";
 import { Navbar, Button } from "keep-react";
 import { FaMoon , FaSun } from "react-icons/fa";
 import { BsCameraReelsFill } from "react-icons/bs";
@@ -16,7 +14,7 @@ const NavbarComponent = ({setTheme, theme}) => {
     }
     
     return (
-        <Navbar fluid={true} className="dark:bg-slate-900 bg-[#ecf0ff]">
+        <Navbar fluid={true} className="dark:bg-slate-900 bg-opacity-80 dark:bg-opacity-80 backdrop:blur-sm dark:backdrop-blur-sm bg-[#d3ddff]">
             <Navbar.Container className="flex items-center justify-between ">
                 <Navbar.Container className="flex items-center">
                     <Navbar.Brand className="m-3">
@@ -35,12 +33,7 @@ const NavbarComponent = ({setTheme, theme}) => {
                 </Navbar.Container>
 
                 <Navbar.Container className="flex gap-2 items-center">
-                    <Button size="sm" type="link">
-                        <span>
-                            <MagnifyingGlass size={20} className="dark:text-white"/>
-                        </span>
-                        <span className="ml-2 text-metal-600 dark:text-stone-100">Buscar</span>
-                    </Button>
+                    
                     <Button size="sm" color="warning">
                         <BsCameraReelsFill className="mr-3" />
                         Iniciar sesion de hoy

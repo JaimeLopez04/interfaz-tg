@@ -1,4 +1,5 @@
 import keepPreset from "keep-react/preset";
+import defaultTheme from 'tailwindcss/defaultTheme'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -11,9 +12,13 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        backgroundAuthentication: "url('./src/assets/planeta.jpg')"
+        backgroundAuthentication: "url('./src/assets/planeta.jpg')",
+        backgroundAplication: "url('./src/assets/fondo3.svg')"
       }
-    }
+    },
+    fontFamily: {
+      'sans': ['"Quicksand"', ...defaultTheme.fontFamily.sans],
+    },
   },
   plugins: [],
   presets: [keepPreset],

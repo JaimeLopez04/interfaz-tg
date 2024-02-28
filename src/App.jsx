@@ -12,7 +12,7 @@ import Live from './components/pages/Live';
 //        #567dff azul claro
 //        #f06806 naranja intenso
 //        #46003A morado
-//        #46003A morado
+//        ##0c0c0f negro background
 
 function App() {
 
@@ -34,7 +34,7 @@ function App() {
   
   
   return (
-    <div className='dark:bg-slate-900 bg-neutral-50'>      
+    <div className='dark:bg-slate-900 bg-neutral-50  bg-backgroundAplication bg-no-repeat bg-cover'>      
       <Routes>
         <Route  path="/" element={<Navigate to="/login"/>} />
         <Route path='/login' element={<Login/>}/>
