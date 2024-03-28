@@ -72,8 +72,7 @@ const WebCamRecorder = () => {
         streamRecorderRef.current.ondataavailable = function (event) {
             chunks.current.push(event.data);
         };
-    console.log(streamRecorderRef.current.ondataavailable);
-    console.log(chunks.current);
+        
         setIsRecording(true);
     }
     
@@ -100,11 +99,46 @@ const WebCamRecorder = () => {
             return;
         }
 
-        console.log('Holi process');
         var blob = new Blob(chunks.current);
         chunks.current = [];
         var url = URL.createObjectURL(blob);
         setDownloadLink(url);
+
+        // Enviar segmentos a la API
+        const segmentDuration = 30 * 1000; // 30 segundos en milisegundos
+        let startTime = 0;
+        let endTime = segmentDuration;
+        while (startTime < blob.size) {
+            const chunk = blob.slice(startTime, endTime);
+            // Enviar `chunk` a la API utilizando fetch o axios
+            // Aquí se asume que hay una función llamada `sendChunkToAPI` que envía el segmento a la API
+            sendChunkToAPI(chunk);
+            startTime = endTime;
+            endTime += segmentDuration;
+        }
+    }
+
+    // Función para enviar cada segmento a la API
+    function sendChunkToAPI(chunk) {
+        // Aquí debes enviar `chunk` a tu API utilizando fetch o axios
+        // Por ejemplo, utilizando fetch:
+        const formData = new FormData();
+        formData.append('videoChunk', chunk);
+
+        // fetch('tu_endpoint_de_api', {
+        //     method: 'POST',
+        //     body: formData,
+        // })
+        // .then(response => {
+        //     if (!response.ok) {
+        //         throw new Error('Error al enviar segmento a la API');
+        //     }
+        //     console.log('Segmento enviado con éxito');
+        // })
+        // .catch(error => {
+        //     console.error('Error:', error);
+        // });
+        console.log('se envioo');
     }
 
     useEffect(() => {
