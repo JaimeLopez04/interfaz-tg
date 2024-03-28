@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 //React Libraries
 import { useState } from "react"
 import Swal from 'sweetalert2'
@@ -56,6 +57,7 @@ const Login = () => {
         }).then(function(res){
             if(res.data.status_code === 200){
                 navigate('/home')
+                localStorage.setItem('names', res.data.message);
                 Swal.fire({
                     icon: "success",
                     title: "Bienvenid@ de nuevo",

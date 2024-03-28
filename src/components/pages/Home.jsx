@@ -3,13 +3,14 @@ import NavbarComponent from '../NavBar'
 import PropTypes from 'prop-types'
 
 const Home = ({setTheme, theme}) => {
+    const nameUser = localStorage.getItem('names')
     return (
         <div className='h-screen'>
             <NavbarComponent setTheme={setTheme}  theme={theme} />
 
             <div className='w-auto mx-4 mt-4 dark:border-slate-600 border-slate-300  border rounded-md shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-15 bg-black'>
                 <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-white  p-5 '>
-                    Bienvenido de nuevo, Lorem Ipsum!
+                    Bienvenido de nuevo, {nameUser}
                 </h1>
             </div>
             <div className='flex sm:w-full'>
