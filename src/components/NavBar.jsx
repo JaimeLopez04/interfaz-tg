@@ -13,6 +13,10 @@ const NavbarComponent = ({setTheme, theme}) => {
     const handleChangeTheme = () => {        
         setTheme((prevTheme => prevTheme ==  "light" ? "dark" : "light"))
     }
+
+    const clearLocalStorage = () => {
+        localStorage.clear()
+    }
     
     return (
         <Navbar fluid={true} className="dark:bg-slate-900 bg-opacity-80 dark:bg-opacity-80 backdrop:blur-sm dark:backdrop-blur-sm bg-[#d3ddff]">
@@ -44,7 +48,7 @@ const NavbarComponent = ({setTheme, theme}) => {
                         <SiPython className="text-lg ml-1"/>
                     </Button>
 
-                    <Button size="sm" type="primary" circle={true} href="/login" className="px-5">
+                    <Button size="sm" type="primary" circle={true} href="/login" onClick={clearLocalStorage}>
                         Salir
                     </Button>
 

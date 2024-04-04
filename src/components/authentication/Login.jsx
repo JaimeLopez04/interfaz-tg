@@ -56,12 +56,13 @@ const Login = () => {
             password : values.password
         }).then(function(res){
             if(res.data.status_code === 200){
+                console.log(res.data)
                 navigate('/home')
                 localStorage.setItem('data', JSON.stringify(res.data));
                 Swal.fire({
                     icon: "success",
                     title: "Bienvenid@ de nuevo",
-                    text: res.data.names,
+                    text: res.data.name,
                     confirmButtonColor: "#0c16ff",
                     background: '#efefef',
                     color: "black"
