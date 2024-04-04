@@ -3,7 +3,8 @@ import NavbarComponent from '../NavBar'
 import PropTypes from 'prop-types'
 
 const Home = ({setTheme, theme}) => {
-    const nameUser = localStorage.getItem('names')
+    // const storedData = JSON.parse(localStorage.getItem('data'));
+    const nameUser = JSON.parse(localStorage.getItem('data')).names
     return (
         <div className='h-screen'>
             <NavbarComponent setTheme={setTheme}  theme={theme} />

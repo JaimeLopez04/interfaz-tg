@@ -57,11 +57,11 @@ const Login = () => {
         }).then(function(res){
             if(res.data.status_code === 200){
                 navigate('/home')
-                localStorage.setItem('names', res.data.message);
+                localStorage.setItem('data', JSON.stringify(res.data));
                 Swal.fire({
                     icon: "success",
                     title: "Bienvenid@ de nuevo",
-                    text: res.data.message,
+                    text: res.data.names,
                     confirmButtonColor: "#0c16ff",
                     background: '#efefef',
                     color: "black"
