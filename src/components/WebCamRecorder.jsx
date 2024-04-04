@@ -117,6 +117,7 @@ const WebCamRecorder = () => {
             }
             // Leer el cuerpo de la respuesta como JSON
             const responseData = await response.json();
+            localStorage.setItem('emotion_resumen', responseData)
             console.log(responseData);
         } catch (error) {
             console.error("Error al enviar el video al servidor:", error);
