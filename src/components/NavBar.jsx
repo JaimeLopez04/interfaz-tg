@@ -48,7 +48,7 @@ const NavbarComponent = ({setTheme, theme}) => {
                         <SiPython className="text-lg ml-1"/>
                     </Button>
 
-                    <Button size="sm" type="primary" circle={true} href="/login" onClick={clearLocalStorage}>
+                    <Button size="sm" type="primary" circle={true} href="/login" onClick={clearLocalStorage} className="px-5">
                         Salir
                     </Button>
 
