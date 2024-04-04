@@ -1,4 +1,5 @@
 import BarComponent from '../BarChart'
+import { CarouselComponent } from '../Carrusel'
 import NavbarComponent from '../NavBar'
 import PropTypes from 'prop-types'
 
@@ -20,10 +21,7 @@ const Home = ({setTheme, theme}) => {
                     <BarComponent/>
                 </div>
                 <div className=' dark:border-slate-600 border-slate-300  border rounded-md shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-15 bg-black m-4 p-4 w-1/3'>
-                    <h2 className='dark:text-white text-xl font-bold mx-6 tracking-wider'>Nuestro proyecto</h2>
-                    <p className='dark:text-white text-base mx-6 mt-4 '>
-                        Este proyecto busca explorar y explotar la inteligencia artificial en el entorno académico, proporcionando al docente una visión clara de las emociones de los estudiantes que asisten a sus clases, por lo que puede realizar ajustes a su metodología de enseñanza y encontrar puntos de mejora, así mismo mantener los puntos positivos de su interacción con estos.
-                    </p>
+                    <CarouselComponent/>
                 </div>
             </div>
         </div>
