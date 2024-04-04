@@ -1,12 +1,14 @@
-import NavbarComponent from "../NavBar"
 import PropTypes from 'prop-types'
 import WebCamRecorder from "../WebCamRecorder"
+import NavbarComponent from '../NavBar'
 
 const Live = ({setTheme, theme}) => {
+
     return (
-        <div className='h-screen'>
+        <div className='h-full pb-11'>
             <NavbarComponent setTheme={setTheme}  theme={theme}/>
-            <WebCamRecorder/>
+
+            <WebCamRecorder />
         </div>
     )
 }

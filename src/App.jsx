@@ -23,7 +23,7 @@ function App() {
 
     return "ligth"
   });
-
+  
   useEffect(() => {
     if (theme == "dark"){
       document.querySelector("html").classList.add("dark")
@@ -34,7 +34,7 @@ function App() {
   
   
   return (
-    <div className='dark:bg-slate-900 bg-neutral-50  bg-backgroundAplication bg-no-repeat bg-cover'>      
+    <div className='dark:bg-slate-900 bg-neutral-50  bg-backgroundAplication bg-no-repeat bg-cover'>  
       <Routes>
         <Route  path="/" element={<Navigate to="/login"/>} />
         <Route path='/login' element={<Login/>}/>

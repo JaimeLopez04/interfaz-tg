@@ -1,4 +1,6 @@
+import { Button } from "keep-react";
 import { useEffect, useRef, useState } from "react";
+import { BsCameraReelsFill } from "react-icons/bs";
 import { FaArrowCircleDown } from "react-icons/fa";
 
 
@@ -16,129 +18,46 @@ const WebCamRecorder = () => {
     const videoRef = useRef(null);
     const streamRecorderRef = useRef(null)
 
-    // function startRecording(){
-    //     if(isRecording){
-    //         return
-    //     }
-    //     if(!streamRef.current){
-    //         return
-    //     }
+    function startRecording(){
+        if(isRecording){
+            return
+        }
+        if(!streamRef.current){
+            return
+        }
 
-    //     streamRecorderRef.current =  new MediaRecorder(streamRef.current)
-    //     streamRecorderRef.current.start() 
-    //     streamRecorderRef.current.ondataavailable = function(event) {
-    //         if (chunks.current) {
-    //             chunks.current.push(event.data);
-    //         }
-    //     };
+        streamRecorderRef.current =  new MediaRecorder(streamRef.current)
+        streamRecorderRef.current.start() 
+        streamRecorderRef.current.ondataavailable = function(event) {
+            if (chunks.current) {
+                chunks.current.push(event.data);
+            }
+        };
 
-    //     setIsRecording(true)
-    // }
+        setIsRecording(true)
+    }
 
-    // useEffect(() => {
-    //     if (isRecording) {
-    //         return;
-    //     }
-        
-    //     if (chunks.current.length === 0) {
-    //         return;
-    //     }
-    //     var blob = new Blob(chunks.current);
-    //     chunks.current = [];
-    //     var url = URL.createObjectURL(blob);
-    //     setDownloadLink(url)
-    // }, [isRecording]);
-    
-    // function stopRecording(){
-    //     if (!streamRecorderRef.current ) {
-    //         return;
-    //     }
-
-    //     streamRecorderRef.current.stop();
-    //     setIsRecording(false)
-    // }
-
-    function startRecording() {
+    useEffect(() => {
         if (isRecording) {
             return;
         }
-        if (!streamRef.current) {
-            return;
-        }
-        streamRecorderRef.current = new MediaRecorder(streamRef.current);
-        streamRecorderRef.current.start();
-        console.log(streamRecorderRef.current);
-    
-        streamRecorderRef.current.ondataavailable = function (event) {
-            chunks.current.push(event.data);
-        };
         
-        setIsRecording(true);
-    }
-    
-    function stopRecording() {
-
-        console.log(chunks);
-        console.log(streamRecorderRef.current);
-        console.log(isRecording);
-        if (!streamRecorderRef.current) {
-            return;
-        }
-    
-        // Procesar el video después de detener la grabación
-        processVideo();
-
-        streamRecorderRef.current.stop();
-        setIsRecording(false);
-    
-        
-    }
-    
-    function processVideo() {
         if (chunks.current.length === 0) {
             return;
         }
-
         var blob = new Blob(chunks.current);
         chunks.current = [];
         var url = URL.createObjectURL(blob);
-        setDownloadLink(url);
-
-        // Enviar segmentos a la API
-        const segmentDuration = 30 * 1000; // 30 segundos en milisegundos
-        let startTime = 0;
-        let endTime = segmentDuration;
-        while (startTime < blob.size) {
-            const chunk = blob.slice(startTime, endTime);
-            // Enviar `chunk` a la API utilizando fetch o axios
-            // Aquí se asume que hay una función llamada `sendChunkToAPI` que envía el segmento a la API
-            sendChunkToAPI(chunk);
-            startTime = endTime;
-            endTime += segmentDuration;
+        setDownloadLink(url)
+    }, [isRecording]);
+    
+    function stopRecording(){
+        if (!streamRecorderRef.current ) {
+            return;
         }
-    }
 
-    // Función para enviar cada segmento a la API
-    function sendChunkToAPI(chunk) {
-        // Aquí debes enviar `chunk` a tu API utilizando fetch o axios
-        // Por ejemplo, utilizando fetch:
-        const formData = new FormData();
-        formData.append('videoChunk', chunk);
-
-        // fetch('tu_endpoint_de_api', {
-        //     method: 'POST',
-        //     body: formData,
-        // })
-        // .then(response => {
-        //     if (!response.ok) {
-        //         throw new Error('Error al enviar segmento a la API');
-        //     }
-        //     console.log('Segmento enviado con éxito');
-        // })
-        // .catch(error => {
-        //     console.error('Error:', error);
-        // });
-        console.log('se envioo');
+        streamRecorderRef.current.stop();
+        setIsRecording(false)
     }
 
     useEffect(() => {
@@ -210,41 +129,121 @@ const WebCamRecorder = () => {
         
     }, [audioSource, videoSource]);
 
+    const [date, setDate] = useState('');
+
+    useEffect(() => {
+        // Función para obtener la fecha actual en el formato YYYY-MM-DD
+        const getCurrentDate = () => {
+            const currentDate = new Date();
+            const year = currentDate.getFullYear();
+            const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+            const day = currentDate.getDate().toString().padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        };
+
+        // Establecer el estado con la fecha actual
+        setDate(getCurrentDate());
+    }, []); // Se ejecuta solo una vez al montar el component
+
     return (
         <div>
             <div className="flex m-3 gap-4 justify-center">
-                <select
-                    name="videoSource"
-                    id="videoSource"
-                    value={videoSource}
-                    onChange={(event) => setVideoSource(event.target.value)}
-                    className="z-10 mt-1 max-h-56 w-auto overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-                >
-                    {videoSourceOptions.map(option => (
-                        <option 
-                            key={option.value} 
-                            value={option.value}
-                            className="text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9">
-                            {option.label}
-                        </option>
-                    ))}
-                </select>
-                <select
-                    name="audioSource"
-                    id="audioSource"
-                    value={audioSource}
-                    onChange={(event) => setAudioSource(event.target.value)}
-                    className="z-10 mt-1 max-h-56 w-auto overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-                >
-                    {audioSourceOptions.map(option => (
-                        <option 
-                            key={option.value} 
-                            value={option.value}
-                            className="text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9">
-                            {option.label}
-                        </option>
-                    ))}
-                </select>
+                <div>
+                    <label htmlFor="dateClass" className="block text-sm font-medium leading-6 text-white">
+                        Camara de video
+                    </label>
+                    <select
+                        name="videoSource"
+                        id="videoSource"
+                        value={videoSource}
+                        onChange={(event) => setVideoSource(event.target.value)}
+                        className="z-10 mt-1 max-h-56 w-80 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                    >
+                        {videoSourceOptions.map(option => (
+                            <option 
+                                key={option.value} 
+                                value={option.value}
+                                className="text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9">
+                                {option.label}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div>
+                    <label htmlFor="dateClass" className="block text-sm font-medium leading-6 text-white">
+                        Audio
+                    </label>
+                    <select
+                        name="audioSource"
+                        id="audioSource"
+                        value={audioSource}
+                        onChange={(event) => setAudioSource(event.target.value)}
+                        className="z-10 mt-1 max-h-56 w-80 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                    >
+                        {audioSourceOptions.map(option => (
+                            <option 
+                                key={option.value} 
+                                value={option.value}
+                                className="text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9">
+                                {option.label}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+            </div>
+
+            <div className="flex m-3 gap-4 justify-center">
+                <div>
+                    <label htmlFor="dateClass" className="block text-sm font-medium leading-6 text-white">
+                        Fecha de la clase
+                    </label>
+                    <div className="relative mt-2 rounded-md shadow-sm">
+                        <input
+                            type="date"
+                            name="dateClass"
+                            id="dateClass"
+                            className="block rounded-md border-0 py-1.5 px-3 w-80 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            value={date} // Establecer el valor del input con el estado date
+                            readOnly // Para evitar que el usuario cambie la fecha
+                        />
+                    </div>
+                </div>
+
+                <div>
+                    <label htmlFor="nameClass" className="block text-sm font-medium leading-6 text-white">
+                        Nombre de la clase
+                    </label>
+                    <div className="relative mt-2 rounded-md shadow-sm">
+                        <input
+                            type="text"
+                            name="nameClass"
+                            id="nameClass"
+                            className="block rounded-md border-0 py-1.5 px-3 w-80 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            placeholder="Ingrese el nombre de la clase a analizar"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div className="flex m-4 gap-4 justify-center items-center">
+                <Button 
+                    size="sm" 
+                    color={isRecording ? "error" : "warning"} 
+                    onClick={isRecording ? stopRecording : startRecording}>
+                    <BsCameraReelsFill className="mr-3" />
+                    {isRecording ? 'Parar sesión de hoy' : 'Iniciar sesión de hoy'}
+                </Button>
+                
+                {downloadLink && 
+                    <button className="inline-block h-8 w-8 rounded-full ring-2 ring-white m-2">
+                        <a 
+                        href={downloadLink} 
+                        download="file.mp4" 
+                        >
+                        <FaArrowCircleDown className="w-8 text-white" />
+                        </a>
+                    </button>}
             </div>
 
             <div className="flex m-4 gap-4 justify-center">
@@ -260,7 +259,7 @@ const WebCamRecorder = () => {
             </div>
 
             <div className="flex m-4 gap-4 justify-center items-center">
-                <button 
+                {/* <button 
                     onClick={startRecording} 
                     disabled={isRecording}
                     className="flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
@@ -271,16 +270,8 @@ const WebCamRecorder = () => {
                     disabled={!isRecording}
                     className="flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     Parar
-                </button>
-                {downloadLink && 
-                    <button className="inline-block h-8 w-8 rounded-full ring-2 ring-white m-2">
-                        <a 
-                        href={downloadLink} 
-                        download="file.mp4" 
-                        >
-                        <FaArrowCircleDown className="w-8 text-white" />
-                        </a>
-                    </button>}
+                </button> */}
+                
             </div>
         </div>
     );

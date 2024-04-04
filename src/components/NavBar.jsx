@@ -1,15 +1,16 @@
 
 "use client";
 import { Navbar, Button } from "keep-react";
-import { FaMoon , FaSun } from "react-icons/fa";
-import { BsCameraReelsFill } from "react-icons/bs";
-
+import { FaMoon , FaReact, FaSun } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+import { SiPython } from "react-icons/si";
 
 import Logo from '../assets/LogoTG.png'
 import PropTypes from 'prop-types'
 
 const NavbarComponent = ({setTheme, theme}) => {
-    const handleChangeTheme = () => {        
+
+    const handleChangeTheme = () => {   
         setTheme((prevTheme => prevTheme ==  "light" ? "dark" : "light"))
     }
     
@@ -27,23 +28,33 @@ const NavbarComponent = ({setTheme, theme}) => {
                         <ul className="lg:flex  items-center justify-between gap-8 dark:text-white ">
                             <li><a href="/home">Inicio</a></li>
                             <li><a href="/myClasses">Mis clases</a></li>
-                            <li><a href="/live">En vivo</a></li>
+                            <li><a href="/live">Analisis de clases</a></li>
                         </ul>
                     </Navbar.Container>
                 </Navbar.Container>
 
                 <Navbar.Container className="flex gap-2 items-center">
-                    
-                    <Button size="sm" color="warning">
-                        <BsCameraReelsFill className="mr-3" />
-                        Iniciar sesion de hoy
+
+                    <Button size="sm" color="success" circle={true} href="https://github.com/JaimeLopez04/interfaz-tg" target="_blank">
+                        <FaGithub className="text-lg mr-1"/> -
+                        <FaReact className="text-lg ml-1"/>
                     </Button>
-                    <Button size="sm" type="primary" href="/login">
+
+                    <Button size="sm" color="warning" circle={true} href="https://github.com/JaimeLopez04/FastAPI-TG" target="_blank">
+                        <FaGithub className="text-lg mr-1"/> -
+                        <SiPython className="text-lg ml-1"/>
+                    </Button>
+
+                    <Button size="sm" type="primary" circle={true} href="/login" className="px-5">
                         Salir
                     </Button>
+
                     <Button size="sm"  type="primary" onClick={handleChangeTheme} circle={true} className="items-center justify-center flex">
-                        {theme === 'light' ? <FaMoon /> : <FaSun />}
+                        {theme === 'light' ? <FaMoon className="text-lg"/> : <FaSun className="text-lg"/>}
                     </Button>
+
+                    
+
                 </Navbar.Container>
             </Navbar.Container>
         </Navbar>

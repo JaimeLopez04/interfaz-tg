@@ -1,66 +1,78 @@
+import { BarChart } from '@mui/x-charts/BarChart';
+import { axisClasses } from '@mui/x-charts';
 
-"use client";
-import { BarChart } from "keep-react";
+const chartSetting = {
+    width: 800,
+    height: 300,    
+    sx: {
+        [`.${axisClasses.left} .${axisClasses.label}`]: {
+            transform: 'translate(-20px, 0)',
+        },
+    },
 
-const BarChartData = [
+};
+
+const dataset = [
     {
-        name: "1",
-        emotion: "Enojo",
-        sell: 0.14,
+        porcentaje: 59,
+        emocion: 'Felicidad',
     },
     {
-        name: "2",
-        emotion: "Disgusto",
-        sell: 0.14,
+        porcentaje: 50,
+        emocion: 'Tristeza',
     },
     {
-        name: "3",
-        emotion: "Miedo",
-        sell: 0.14,
+        porcentaje: 47,
+        emocion: 'Disgusto',
     },
     {
-        name: "4",
-        emotion: "Felicidad",
-        sell: 0.14,
+        porcentaje: 54,
+        emocion: 'Miedo',
     },
     {
-        name: "5",
-        emotion: "Neutro",
-        sell: 0.14,
+        porcentaje: 57,
+        emocion: 'Sorpresa',
     },
     {
-        name: "6",
-        emotion: "Tristeza",
-        sell: 0.1,
+        porcentaje: 60,
+        emocion: 'Enojo',
     },
     {
-        name: "7",
-        emotion: "Sorpresa",
-        sell: 0.30,
+        porcentaje: 59,
+        emocion: 'Neutro',
     }
 ];
-    
-const BarComponent = () => {
+
+const valueFormatter = (value) => `${value}%`;
+
+export default function BarsDataset() {
+
     return (
         <BarChart
-            height={250}
-            width={700}
-            dataKey="sell"
-            chartData={BarChartData}
-            barSize={100}
-            showBg={true}
-            // showLegend={true}
-            showTooltip={true}
-            barRadius={[4, 4, 0, 0]}
-            showXaxis={true}
-            XAxisDataKey="emotion"
-            active={true}
-            // activeIndex={5}
-            activeColor="#f06806"
-            inActiveColor="#94ABFF"
+            dataset={dataset}
+            xAxis={[{ 
+                scaleType: 'band', 
+                dataKey: 'emocion', 
+                color: 'white', 
+                tickLabelStyle: { 
+                    fill: 'white',  
+                    fontSize: 16, 
+                    fontFamily: 'Quicksand' },
+                }]
+            }
+            yAxis={[{
+                tickLabelStyle: {
+                    fill: '#fff',
+                    fontSize: 16,
+                    fontFamily: 'Quicksand'
+                }
+            }]}
+            series={
+                [{ dataKey: 'porcentaje', valueFormatter, color: '#53eae0' }]
+            }
+            {...chartSetting}
         />
     );
 }
 
-export default BarComponent
 
