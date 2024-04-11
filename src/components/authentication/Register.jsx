@@ -119,6 +119,7 @@ const Register = () => {
                 })
             }
         }).catch(function(e){
+            console.log(e)
             Swal.fire({
                 icon: "error",
                 title: "Oops...!",
