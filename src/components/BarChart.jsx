@@ -119,6 +119,11 @@ export default function BarsDataset() {
                 id_user: id_user
             }
         }).then((response) => {
+
+            if (response.data.message) {
+                return <p> {response.data.message} </p>
+            }
+            console.log(response)
             const emotionsData = response.data.emotions_totals;
             const totalFacesDetected = emotionsData.total_faces_detected;
             const emotionsPercentages = {};
