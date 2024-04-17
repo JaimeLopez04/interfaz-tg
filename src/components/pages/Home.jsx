@@ -19,7 +19,7 @@ const Home = ({setTheme, theme}) => {
             <div className='flex sm:w-full'>
                 <div className=' dark:border-slate-600 border-slate-300  border rounded-md shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-15 bg-black m-4 p-4 w-2/3'>
                     <h2 className='dark:text-white text-xl ml-2 mb-2 font-bold tracking-wider'>Resumen de la semana</h2>
-                    <BarComponent/>
+                    <BarComponent id_user={id_user} />
                 </div>
                 <div className=' dark:border-slate-600 border-slate-300  border rounded-md shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-15 bg-black m-4 p-4 w-1/3'>
                     <CarouselComponent/>
