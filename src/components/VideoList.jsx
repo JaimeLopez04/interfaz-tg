@@ -5,13 +5,13 @@ const VideoList = ({ videos, emptyHeading }) => {
     const count = videos.length;
     let heading = emptyHeading;
     if (count > 0) {
-        const noun = count > 1 ? 'Videos' : 'Video';
-        heading = count + ' ' + noun;
+        const noun = count > 1 ? 'videos' : 'video';
+        heading = 'Aqui puedes ver ' + count + ' ' + noun + ' de momentos de la clase en los que se evidenciaron emociones negativas en los estudiantes';
     }
 
     return (
         <section className="h-[75vh] overflow-auto">
-            <h2 className='text-white'>Aqui puedes ver {heading} de momentos de la clase en los que se evidenciaron emociones negativas en los estudiantes</h2>
+            <h2 className='text-white'> {heading} </h2>
             {videos.map(video =>
                 <Video key={video.key} video={video} />
             )}
