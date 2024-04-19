@@ -4,7 +4,7 @@ import WebCamRecorder from "../WebCamRecorder"
 
 const Live = ({setTheme, theme}) => {
     return (
-        <div className='h-full pb-11'>
+        <div className='h-full pb-36'>
             <NavbarComponent setTheme={setTheme}  theme={theme}/>
             <WebCamRecorder/>
         </div>

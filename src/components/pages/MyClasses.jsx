@@ -4,7 +4,6 @@ import TimelineComponent from "../Timeline"
 import VideoList from "../VideoList";
 import { useState } from "react";
 
-
 const MyClasses = ({setTheme, theme}) => {
 
     const [selectedVideos, setSelectedVideos] = useState([]);
