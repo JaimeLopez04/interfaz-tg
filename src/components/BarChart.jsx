@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 //Local Libraries
 import { apiUrl } from '../api/apiUrl'
+import './../styles/loading.css'
 
 const chartSetting = {
     width: 800,

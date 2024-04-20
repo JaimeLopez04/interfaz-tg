@@ -4,6 +4,8 @@ import { BsCameraReelsFill } from "react-icons/bs";
 import { Button } from "keep-react";
 import fetch from "isomorphic-fetch";
 import { apiUrl } from "../api/apiUrl";
+import Swal from 'sweetalert2'
+
 
 const WebCamRecorder = () => {
     const [audioSource, setAudioSource] = useState("");
@@ -85,6 +87,17 @@ const WebCamRecorder = () => {
     }, [audioSource, videoSource]);
 
     const startRecordingButton = () => {
+        if (class_name.trim() === '') {
+            Swal.fire({
+                icon: "error",
+                title: "Recuerda que...",
+                text: 'Debes ingresar el nombre de la clase antes de iniciar la sesión.',
+                confirmButtonColor: "#0c16ff",
+                background: '#efefef',
+                color: "black"
+            })
+            return;
+        }
         setIsRecording(true);
         setRecording(true);
         startRecording();
@@ -178,9 +191,13 @@ const WebCamRecorder = () => {
     }, []); // Se ejecuta solo una vez al montar el component
 
     const handleInputChange = (event) => {
-        setClassName(event.target.value);
+        const formattedValue = capitalizeFirstLetter(event.target.value);
+        setClassName(formattedValue);
     };
 
+    const capitalizeFirstLetter = (value) => {
+        return value.replace(/\b\w/g, (char) => char.toUpperCase());
+    };
     useEffect(() => {
         let recordingInterval;
         let restartInterval;
@@ -269,53 +286,53 @@ const WebCamRecorder = () => {
 
         <div className="flex m-3 gap-4 justify-center">
             <div>
-            <label
-                htmlFor="dateClass"
-                className="block text-sm font-medium leading-6 text-white"
-            >
-                Fecha de la clase
-            </label>
-            <div className="relative mt-2 rounded-md shadow-sm">
-                <input
-                type="date"
-                name="dateClass"
-                id="dateClass"
-                className="block rounded-md border-0 py-1.5 px-3 w-80 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                value={date} // Establecer el valor del input con el estado date
-                readOnly // Para evitar que el usuario cambie la fecha
-                />
-            </div>
+                <label
+                    htmlFor="dateClass"
+                    className="block text-sm font-medium leading-6 text-white"
+                >
+                    Fecha de la clase
+                </label>
+                <div className="relative mt-2 rounded-md shadow-sm">
+                    <input
+                    type="date"
+                    name="dateClass"
+                    id="dateClass"
+                    className="block rounded-md border-0 py-1.5 px-3 w-80 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    value={date} // Establecer el valor del input con el estado date
+                    readOnly // Para evitar que el usuario cambie la fecha
+                    />
+                </div>
             </div>
 
             <div>
-            <label
-                htmlFor="nameClass"
-                className="block text-sm font-medium leading-6 text-white"
-            >
-                Nombre de la clase
-            </label>
-            <div className="relative mt-2 rounded-md shadow-sm">
-                <input
-                type="text"
-                name="nameClass"
-                id="nameClass"
-                value={class_name}
-                onChange={handleInputChange} // Asignamos el controlador de eventos al evento onChange
-                className="block rounded-md border-0 py-1.5 px-3 w-80 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder="Ingrese el nombre de la clase a analizar"
-                />
-            </div>
+                <label
+                    htmlFor="nameClass"
+                    className="block text-sm font-medium leading-6 text-white"
+                >
+                    Nombre de la clase
+                </label>
+                <div className="relative mt-2 rounded-md shadow-sm">
+                    <input
+                    type="text"
+                    name="nameClass"
+                    id="nameClass"
+                    value={class_name}
+                    onChange={handleInputChange} // Asignamos el controlador de eventos al evento onChange
+                    className="block rounded-md border-0 py-1.5 px-3 w-80 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    placeholder="Ingrese el nombre de la clase a analizar"
+                    />
+                </div>
             </div>
         </div>
 
         <div className="flex m-4 gap-4 justify-center items-center">
             <Button
-            size="sm"
-            color={recording ? "error" : "warning"}
-            onClick={recording ? stopRecordingButton : startRecordingButton}
-            >
-            <BsCameraReelsFill className="mr-3" />
-                {recording ? "Parar sesión de hoy" : "Iniciar sesión de hoy"}
+                size="sm"
+                color={recording ? "error" : "warning"}
+                onClick={recording ? stopRecordingButton : startRecordingButton}
+                >
+                <BsCameraReelsFill className="mr-3" />
+                    {recording ? "Parar sesión de hoy" : "Iniciar sesión de hoy"}
             </Button>
 
             {downloadLink && (
@@ -329,15 +346,17 @@ const WebCamRecorder = () => {
 
         <div className="flex m-4 gap-4 justify-center">
             <div className="w-1/3 m-6 flex justify-center items-center shadow-md">
-            <video ref={videoRef} autoPlay muted playsInline />
+                <video ref={videoRef} autoPlay muted playsInline />
             </div>
 
             {error && <p>{error.message}</p>}
 
             {downloadLink && (
-            <div className="w-1/3 m-6 flex justify-center shadow-md">
-                <video src={downloadLink} controls />
-                <h5>En este momento tus estudiantes sienten : {dominantEmotion}</h5>
+            <div className="w-1/3 m-6 flex flex-col justify-center items-center  gap-4">
+                <h5 className="dark:text-white w-80  text-center">
+                    En este momento tus estudiantes sienten : <strong>{dominantEmotion}</strong>
+                </h5>
+                <video className="w-80 shadow-md" src={downloadLink} autoPlay muted controls />
             </div>
             )}
         </div>
