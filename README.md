@@ -1,7 +1,7 @@
 
-# FRONTEND, Prototipo de analisis de sentimientos en visión por computadora en las aulas de clase de la Universidad del Valle sede Tuluá en FAST API
+# FRONTEND, Prototipo de análisis de sentimientos en visión por computadora en las aulas de clase de la Universidad del Valle sede Tuluá en FAST API
 
-## Description
+## Descripción
 
 Este repositorio contiene el Código fuente del **FRONTEND** para el proyecto análisis de sentimientos por visión de computadora en las aulas de clase de la universidad del valle sede Tuluá, este proyecto pretender ser un apoyo para que los docentes puedan tener una mejor metodología de enseñanza mejorando así significativamente la calidad de la enseñanza y el nivel actual de la educación pues mediante esta app logramos ver en qué momentos las clases pasan de ser entretenidas a algo totalmente diferente brindando un punto de inflexión para que el docente pueda cambiar su metodología.
 
@@ -9,7 +9,7 @@ Este repositorio contiene el Código fuente del **FRONTEND** para el proyecto an
 
 - **Autenticación de usuarios**: Esta aplicación permite fácilmente la autenticación de usuarios mediante un correo y una contraseña.
 - **Registro de usuarios**: Para el registro de usuarios se recogen datos básicos como los nombres, los apellidos, el correo y la contraseña.
-- **Análisis de sentimientos**: Realizando el envío de videos de manera periodica, mientras se tiene una sesión de clases para ser analizada por el algoritmo de analisis de sentmientos con el que cuenta el *API*.
+- **Análisis de sentimientos**: Realizando el envío de videos de manera periódica, mientras se tiene una sesión de clases para ser analizada por el algoritmo de análisis de sentimientos con el que cuenta el *API*.
 - **Resumen semanal**: La aplicación brinda un resumen semanal de las emociones que se han registrado durante todas las clases.
 - **Resumen de emociones**: La aplicación facilita al usuario poder ver los videos de las emociones negativas en tiempo real, así como poder verlos después de las clases para saber en qué momentos las emociones cambiaron.
 
@@ -66,7 +66,7 @@ Para instalar el **FRONTEND** de la aplicación, siga estos pasos:
 
 ***Nota***
 Si no tienes instalado *NodeJS* puedes descargarlo desde [NodeJS](https://nodejs.org/es/)
-También puede que tengas que instalar de forma manual la libreria *isomorphic-fetch* lo cual puedes realizar usando el siguiente comando:
+También puede que tengas que instalar de forma manual la librería *isomorphic-fetch* lo cual puedes realizar usando el siguiente comando:
 
 ```shell
 npm install isomorphic-fetch
