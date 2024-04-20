@@ -19,11 +19,23 @@ const Register = () => {
 
     const [passwordsMatch, setPasswordsMatch] = useState(true);
 
+    const capitalizeFirstLetter = (value) => {
+        return value.replace(/\b\w/g, (char) => char.toUpperCase());
+    };
+    
     const handleInputChange = (event) => {
         const { name, value} = event.target
+
+        let formattedValue = value;
+
+        // Aplicar formato solo si el input es igual a name o lastName
+        if (name === "name" || name === 'lastName') {
+            formattedValue = capitalizeFirstLetter(value);
+        }
+
         setValues({
             ...values,
-            [name]:value
+            [name]:formattedValue
         })
 
         // Comparar contraseñas cuando se escribe en el campo "Confirmar contraseña"
