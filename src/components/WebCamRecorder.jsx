@@ -5,7 +5,7 @@ import { Button } from "keep-react";
 import fetch from "isomorphic-fetch";
 import { apiUrl } from "../api/apiUrl";
 import Swal from 'sweetalert2'
-
+import './../styles/recording.css'
 
 const WebCamRecorder = () => {
     const [audioSource, setAudioSource] = useState("");
@@ -89,7 +89,7 @@ const WebCamRecorder = () => {
     const startRecordingButton = () => {
         if (class_name.trim() === '') {
             Swal.fire({
-                icon: "error",
+                icon: "warning",
                 title: "Recuerda que...",
                 text: 'Debes ingresar el nombre de la clase antes de iniciar la sesión.',
                 confirmButtonColor: "#0c16ff",
@@ -335,6 +335,8 @@ const WebCamRecorder = () => {
                     {recording ? "Parar sesión de hoy" : "Iniciar sesión de hoy"}
             </Button>
 
+            {recording && <span className="recording"></span>}
+            
             {downloadLink && (
             <button className="inline-block h-8 w-8 rounded-full ring-2 ring-white m-2">
                 <a href={downloadLink} download="file.mp4">
