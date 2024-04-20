@@ -97,31 +97,23 @@ const WebCamRecorder = () => {
     };
 
     const startRecording = () => {
-        console.log("Si inicia");
         if (isRecording || !streamRef.current) return;
         streamRecorderRef.current = new MediaRecorder(streamRef.current);
         streamRecorderRef.current.start();
         streamRecorderRef.current.ondataavailable = (event) => {
             chunks.current.push(event.data);
         };
-        console.log("setea la variable en true");
     };
 
     const stopRecording = async () => {
-        console.log("Si para");
         if (!isRecording || !streamRecorderRef.current) return;
         streamRecorderRef.current.stop();
-        console.log("setea la variable en false");
         // Agregamos un timeout de 1000 milisegundos (1 segundo) para dar tiempo a que se acumulen los chunks
         await new Promise((resolve) => setTimeout(resolve, 1000));
         processVideo();
     };
 
     const processVideo = async () => {
-        console.log("Si entra");
-        console.log(chunks); // Esto debería mostrar el objeto con la propiedad current
-        console.log(chunks.current); // Esto debería mostrar el array de chunks actual
-        console.log(chunks.current.length); // Esto debería mostrar la longitud del array de chunks actual
         if (chunks.current.length === 0) return;
         // Obtener el último elemento del array
         const lastIndex = chunks.current.length - 1;
@@ -155,9 +147,6 @@ const WebCamRecorder = () => {
             // Acceder a la propiedad video_link
             const videoLink = responseData.video_link;
 
-            console.log(dominanEmotion); // Output: "Enojo"
-            console.log(videoLink); // Output: "http://localhost:8000/app\storage\videos\1_prueba_2024-04-20_17.mp4"
-
             if (
                 // El dominan_emotion es diferente de Neutral, Felicidad y Sorpresa
                 responseData.emotions_detected.dominan_emotion !== "Neutral" &&
@@ -169,7 +158,6 @@ const WebCamRecorder = () => {
             }
             
             localStorage.setItem("emotion_resumen", responseData);
-            console.log(responseData);
         } catch (error) {
             console.error("Error al enviar el video al servidor:", error);
         }
