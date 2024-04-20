@@ -56,17 +56,17 @@ const Login = () => {
             password : values.password
         }).then(function(res){
             if(res.data.status_code === 200){
+                console.log(res.data)
                 navigate('/home')
-                localStorage.setItem('names', res.data.message);
+                localStorage.setItem('data', JSON.stringify(res.data));
                 Swal.fire({
                     icon: "success",
                     title: "Bienvenid@ de nuevo",
-                    text: res.data.message,
+                    text: res.data.name,
                     confirmButtonColor: "#0c16ff",
                     background: '#efefef',
                     color: "black"
                 })
-                return
             }
         }).catch(function(e){
             console.log(e.response.data.status_code);
@@ -83,7 +83,6 @@ const Login = () => {
             if(e.response.data.message === "Tu usuario no fue encontrado"){
                 navigate('/register')
             }
-            return
         })
     }
 
@@ -140,7 +139,7 @@ const Login = () => {
 
                 <p className="mt-6 text-center text-sm text-slate-300">
                     ¿Aun no esta registrado?
-                    <a 
+                    <a
                         href="/register" 
                         className="font-semibold leading-6 mx-2 text-[#567dff] hover:text-[#f06806] ">
                         Registrate aqui
