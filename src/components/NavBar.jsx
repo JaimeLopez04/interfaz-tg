@@ -10,9 +10,15 @@ import Logo from '../assets/LogoTG.png'
 import PropTypes from 'prop-types'
 
 const NavbarComponent = ({setTheme, theme}) => {
-    const handleChangeTheme = () => {        
-        setTheme((prevTheme => prevTheme ==  "light" ? "dark" : "light"))
-    }
+
+    const handleChangeTheme = () => {
+        // Cambiar el tema
+        const newTheme = theme === "light" ? "dark" : "light";
+        // Guardar el nuevo tema en el Local Storage
+        localStorage.setItem('theme', newTheme);
+        setTheme(newTheme);
+    };
+    
 
     const clearLocalStorage = () => {
         localStorage.clear()
