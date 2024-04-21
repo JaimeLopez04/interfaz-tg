@@ -105,7 +105,6 @@ const Register = () => {
             email : values.email,
             password : values.confirmPassword
         }).then(function(res) {
-            console.log(res);
             if(res.data.status_code === 200){
                 navigate('/login')
                 Swal.fire({
@@ -119,7 +118,6 @@ const Register = () => {
             }
 
             if(res.data.status_code === 422){
-                console.log(res);
                 navigate('/login')
                 Swal.fire({
                     icon: "info",
@@ -130,8 +128,7 @@ const Register = () => {
                     color: "black"
                 })
             }
-        }).catch(function(e){
-            console.log(e)
+        }).catch(function(){
             Swal.fire({
                 icon: "error",
                 title: "Oops...!",

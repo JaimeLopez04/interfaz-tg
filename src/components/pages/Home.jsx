@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 const Home = ({setTheme, theme}) => {
     const nameUser = JSON.parse(localStorage.getItem('data')).name
     const id_user = JSON.parse(localStorage.getItem('data')).id_user
+
     return (
         <div className='h-screen'>
             <NavbarComponent setTheme={setTheme}  theme={theme} />

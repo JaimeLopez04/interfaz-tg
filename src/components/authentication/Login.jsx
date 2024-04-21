@@ -56,7 +56,6 @@ const Login = () => {
             password : values.password
         }).then(function(res){
             if(res.data.status_code === 200){
-                console.log(res.data)
                 navigate('/home')
                 localStorage.setItem('data', JSON.stringify(res.data));
                 Swal.fire({
@@ -69,7 +68,6 @@ const Login = () => {
                 })
             }
         }).catch(function(e){
-            console.log(e.response.data.status_code);
             if(e.response.data.status_code === 422){
                 Swal.fire({
                     icon: "error",

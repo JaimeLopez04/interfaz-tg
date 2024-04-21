@@ -16,18 +16,25 @@ import Live from './components/pages/Live';
 
 function App() {
 
+  const temaActual = localStorage.getItem('theme');
+
   const [theme, setTheme] = useState(() => {
     if(window.matchMedia("(prefers-color-scheme:dark)").matches){
+      if(temaActual &&  temaActual === "dark") {
+        localStorage.setItem('theme','dark')
+      }
       return "dark";
     }
-
+    localStorage.setItem('theme','ligth')
     return "ligth"
   });
 
   useEffect(() => {
-    if (theme == "dark"){
+    if (localStorage.getItem('theme') == "dark"){
+      setTheme(localStorage.getItem('theme'));
       document.querySelector("html").classList.add("dark")
     }else{
+      setTheme(localStorage.getItem('theme'))
       document.querySelector("html").classList.remove("dark")
     }
   }, [theme])

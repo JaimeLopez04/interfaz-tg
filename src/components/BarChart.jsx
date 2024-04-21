@@ -39,7 +39,6 @@ export default function BarsDataset() {
                 setLoading(false); // Cambia el estado de carga a false
                 return;
             }
-            console.log(response)
             const emotionsData = response.data.emotions_totals;
             const totalFacesDetected = emotionsData.total_faces_detected;
             const emotionsPercentages = {};
@@ -56,7 +55,6 @@ export default function BarsDataset() {
                 porcentaje: percentage,
                 emocion: emotion.charAt(0).toUpperCase() + emotion.slice(1)
             }));
-            console.log(response)
             setData(newData); // Actualiza el estado de los datos
             setLoading(false); // Cambia el estado de carga a false
         }).catch((error) => {
