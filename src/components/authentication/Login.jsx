@@ -71,7 +71,7 @@ const Login = () => {
             if(e.response.data.status_code === 422){
                 Swal.fire({
                     icon: "error",
-                    title: "Oops lamentamos decite que...",
+                    title: "Oops lamentamos decirte que...",
                     text: `${e.response.data.message}`,
                     confirmButtonColor: "#0c16ff",
                     background: '#efefef',

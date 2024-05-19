@@ -7,6 +7,9 @@ import PropTypes from 'prop-types'
 import { apiUrl } from "../api/apiUrl";
 import { useState, useEffect } from "react";
 
+import './../styles/loading.css'
+
+
 export default function TimelineComponent({ onShowSummary }) {
 
     const [data, setData] = useState([]);
@@ -36,7 +39,9 @@ export default function TimelineComponent({ onShowSummary }) {
 
     if (loading) {
         // Código para mostrar un indicador de carga mientras se carga la información
-        return <div className='flex flex-col justify-center items-center'>...</div>;
+        return  <div className='flex flex-col justify-center items-center'>
+                    <span className="loader-eye"></span>
+                </div>;
     }
 
     const handleShowSummary = (videos) => {
