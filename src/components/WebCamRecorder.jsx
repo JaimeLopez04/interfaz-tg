@@ -234,7 +234,7 @@ const WebCamRecorder = () => {
             <div>
             <label
                 htmlFor="dateClass"
-                className="block text-sm font-medium leading-6 text-white"
+                className="block text-sm font-medium leading-6 dark:text-white"
             >
                 Camara de video
             </label>
@@ -260,7 +260,7 @@ const WebCamRecorder = () => {
             <div>
             <label
                 htmlFor="dateClass"
-                className="block text-sm font-medium leading-6 text-white"
+                className="block text-sm font-medium leading-6 dark:text-white"
             >
                 Audio
             </label>
@@ -288,7 +288,7 @@ const WebCamRecorder = () => {
             <div>
                 <label
                     htmlFor="dateClass"
-                    className="block text-sm font-medium leading-6 text-white"
+                    className="block text-sm font-medium leading-6 dark:text-white"
                 >
                     Fecha de la clase
                 </label>
@@ -307,7 +307,7 @@ const WebCamRecorder = () => {
             <div>
                 <label
                     htmlFor="nameClass"
-                    className="block text-sm font-medium leading-6 text-white"
+                    className="block text-sm font-medium leading-6 dark:text-white"
                 >
                     Nombre de la clase
                 </label>
@@ -338,9 +338,9 @@ const WebCamRecorder = () => {
             {recording && <span className="recording"></span>}
             
             {downloadLink && (
-            <button className="inline-block h-8 w-8 rounded-full ring-2 ring-white m-2">
+            <button className="inline-block h-8 w-8 rounded-full ring-2 dark:ring-white ring-black m-2">
                 <a href={downloadLink} download="file.mp4">
-                <FaArrowCircleDown className="w-8 text-white" />
+                <FaArrowCircleDown className="w-8 dark:text-white" />
                 </a>
             </button>
             )}

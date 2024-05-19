@@ -1,5 +1,6 @@
 import Video from './Video';
 import PropTypes from 'prop-types'
+import '../styles/loading.css'
 
 const VideoList = ({ videos, emptyHeading }) => {
     const count = videos.length;
@@ -11,7 +12,7 @@ const VideoList = ({ videos, emptyHeading }) => {
 
     return (
         <section className="h-[75vh] overflow-auto">
-            <h2 className='text-white'> {heading} </h2>
+            <h2 className='dark:text-white flex justify-center'> {heading} </h2>
             {videos.map(video =>
                 <Video key={video.key} video={video} />
             )}

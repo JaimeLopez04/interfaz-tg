@@ -39,7 +39,7 @@ export default function TimelineComponent({ onShowSummary }) {
 
     if (loading) {
         // Código para mostrar un indicador de carga mientras se carga la información
-        return  <div className='flex flex-col justify-center items-center'>
+        return  <div className='flex flex-col justify-center items-center mt-28'>
                     <svg height="108px" width="108px" viewBox="0 0 128 128" className="loader">
                         <defs>
                             <clipPath id="loader-eyes">
@@ -71,7 +71,7 @@ export default function TimelineComponent({ onShowSummary }) {
                             </g>
                         </g>
                     </svg>
-                    <p className='text-white mt-1'>Tu información se está cargando...</p>
+                    <p className='dark:text-white mt-1'>Tu información se está cargando...</p>
                 </div>
     }
 
@@ -103,8 +103,19 @@ export default function TimelineComponent({ onShowSummary }) {
                 </Timeline>
             }
             {data.length === 0  &&
-                <div className='flex flex-col justify-center items-center gap-4 text-white'>
-                    No hay aun clases agregadas
+                <div className='flex flex-col justify-center items-center dark:text-white'>
+                    <div className="terminal-loader">
+                        <div className="terminal-header">
+                            <div className="terminal-title">Estado</div>
+                            <div className="terminal-controls">
+                            <div className="control close"></div>
+                            <div className="control minimize"></div>
+                            <div className="control maximize"></div>
+                            </div>
+                        </div>
+                        <div className="text">No hay aun clases agregadas...</div>
+                    </div>
+                    • Ve a la página En vivo y aprovecha las funciones de FeelingApp •
                 </div>
             }
         </div>
