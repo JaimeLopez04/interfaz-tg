@@ -115,7 +115,7 @@ export default function TimelineComponent({ onShowSummary }) {
                         </div>
                         <div className="text">No hay aun clases agregadas...</div>
                     </div>
-                    • Ve a la página En vivo y aprovecha las funciones de FeelingApp •
+                    • Ve a la pestaña En vivo y aprovecha las funciones de FeelingApp •
                 </div>
             }
         </div>

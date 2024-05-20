@@ -106,7 +106,7 @@ export default function BarsDataset() {
             <p className='dark:text-white m-3'>{errorMessage}</p>
             <span className="loader-eye"></span>
             <p className='dark:text-indigo-200 mt-7 font-bold text-xl '>
-                • Ve a la página En vivo y aprovecha las funciones de FeelingApp •
+                • Ve a la pestaña En vivo y aprovecha las funciones de FeelingApp •
             </p>
 
         </div>
